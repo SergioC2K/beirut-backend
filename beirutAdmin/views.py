@@ -1,7 +1,7 @@
 from asyncio import Event
 
 from django.shortcuts import render
-from rest_framework import status, viewsets
+from rest_framework import status, viewsets, generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from beirutAdmin.models import Gallery, Locations, Reservations, SpecialEvents, Menus, Categories, BeirutVideos
@@ -28,7 +28,13 @@ class EventView(viewsets.ModelViewSet):
 
 class MenuView(viewsets.ModelViewSet):
     serializer_class = MenusSerializer
-    queryset = Menus.objects.all()
+
+    def get_queryset(self):
+        queryset = Menus.objects.all()
+        category_id = self.request.query_params.get('category_id', None)
+        if id is not None:
+            queryset = queryset.filter(category_id=category_id)
+        return queryset
 
 
 class MenuCategoriesView(viewsets.ModelViewSet):

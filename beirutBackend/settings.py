@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-^krm4+7i@_6jra45a90fxdm(q_up-wr+^wig331d(+b)18t6lt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['beirut-backend-production.up.railway.app']
+ALLOWED_HOSTS = [os.getenv('HOST_URL')]
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,8 +45,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173',
-    'https://beirut-frontend.onrender.com'
+    os.getenv('FRONTEND_URL')
 ]
 CORS_ALLOW_METHODS = (
     "DELETE",
