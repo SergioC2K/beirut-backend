@@ -1,6 +1,8 @@
+from django.conf.urls.static import static
 from django.urls import path, include
 from rest_framework import routers
 from beirutAdmin import views
+from beirutBackend import settings
 
 router = routers.DefaultRouter()
 router.register(r'location', views.LocationView, basename='location')
@@ -12,6 +14,6 @@ router.register(r'gallery', views.GalleryView, basename='gallery')
 router.register(r'gallery-videos', views.GalleryVideoView, basename='gallery-videos')
 
 urlpatterns = [
-    path('login', views.login, name='login'),
-    path('v1/', include(router.urls)),
-]
+                  path('login', views.login, name='login'),
+                  path('v1/', include(router.urls)),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
