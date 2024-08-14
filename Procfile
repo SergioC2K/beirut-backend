@@ -1,1 +1,1 @@
-web: gunicorn beirutBackend.wsgi
+web: python manage.py collectstatic && gunicorn beirutBackend.wsgi
