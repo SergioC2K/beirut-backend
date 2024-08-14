@@ -13,7 +13,8 @@ SECRET_KEY = 'django-insecure-^krm4+7i@_6jra45a90fxdm(q_up-wr+^wig331d(+b)18t6lt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['beirut-backend-production.up.railway.app']
+# ALLOWED_HOSTS = ['beirut-backend-production.up.railway.app']
+ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
@@ -46,6 +47,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
+    'https://beirut-frontend.onrender.com'
 ]
 CORS_ALLOW_METHODS = (
     "DELETE",
@@ -90,7 +92,18 @@ WSGI_APPLICATION = 'beirutBackend.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+    # 'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'beirut_2024',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
+    }
 
 }
 
