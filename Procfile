@@ -1,1 +1,1 @@
-web: python manage.py collectstatic && gunicorn gunicorn --timeout 1200 beirutBackend.wsgi
+web: python manage.py collectstatic && gunicorn -c gunicorn.conf.py beirutBackend.wsgi
