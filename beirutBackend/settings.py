@@ -13,8 +13,7 @@ SECRET_KEY = 'django-insecure-^krm4+7i@_6jra45a90fxdm(q_up-wr+^wig331d(+b)18t6lt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['beirut-backend-production.up.railway.app']
 # Application definition
 
 INSTALLED_APPS = [
@@ -138,4 +137,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
