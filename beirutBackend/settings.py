@@ -13,8 +13,7 @@ SECRET_KEY = 'django-insecure-^krm4+7i@_6jra45a90fxdm(q_up-wr+^wig331d(+b)18t6lt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
-# ALLOWED_HOSTS = [os.getenv('HOST_URL')]
+ALLOWED_HOSTS = [os.getenv('HOST_URL')]
 # Application definition
 
 INSTALLED_APPS = [
@@ -46,8 +45,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173',
-    # os.getenv('FRONTEND_URL'),
+    os.getenv('FRONTEND_URL'),
 ]
 CORS_ALLOW_METHODS = (
     "DELETE",
@@ -91,22 +89,8 @@ WSGI_APPLICATION = 'beirutBackend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
-# }
-
-
-
-
 DATABASES = {
-    'default': {
-        'NAME': 'beirut_2024',
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': '127.0.0.1',
-        'PORT': 3306,
-        'USER': 'root',
-        'PASSWORD': ''
-    }
+    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
 }
 
 # Password validation
