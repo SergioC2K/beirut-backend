@@ -180,7 +180,7 @@ class Menus(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=500)
     description = models.CharField(max_length=500)
-    price = models.IntegerField(default=0)
+    price = models.DecimalField(..., max_digits=5, decimal_places=2)
     status = models.BooleanField(default=False)
     category = models.ForeignKey(Categories, on_delete=models.CASCADE)
 
