@@ -11,7 +11,8 @@ router.register(r'menu-categories', views.MenuCategoriesView, basename='menu-cat
 router.register(r'gallery', views.GalleryView, basename='gallery')
 router.register(r'gallery-videos', views.GalleryVideoView, basename='gallery-videos')
 
+
 urlpatterns = [
-    path('login', views.login, name='login'),
+    path('v1/login', views.login, name='login'),
     path('v1/', include(router.urls)),
 ]

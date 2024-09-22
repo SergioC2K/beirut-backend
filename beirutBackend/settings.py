@@ -11,9 +11,9 @@ load_dotenv()
 SECRET_KEY = 'django-insecure-^krm4+7i@_6jra45a90fxdm(q_up-wr+^wig331d(+b)18t6lt'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG_MODE'),
 
-ALLOWED_HOSTS = [os.getenv('HOST_URL')]
+ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     "corsheaders",
     'rest_framework',
+    'rest_framework.authtoken',
     'beirutBackend',
     'beirutAdmin',
 ]
@@ -44,9 +45,11 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    os.getenv('FRONTEND_URL'),
-]
+
+
+CORS_ALLOWED_ORIGINS = [os.getenv('FRONTEND_URL')]
+
+
 CORS_ALLOW_METHODS = (
     "DELETE",
     "GET",
