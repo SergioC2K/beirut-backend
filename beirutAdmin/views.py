@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from beirutAdmin import models, serializers
 from django.shortcuts import get_object_or_404
-
+from django.http import Http404
 
 # Locations
 class LocationView(viewsets.ModelViewSet):
@@ -52,8 +52,10 @@ class GalleryVideoView(viewsets.ModelViewSet):
 # Users
 @api_view(['POST'])
 def login(request):
-    
-    user = get_object_or_404(models.UserAdmin,user_name = request.data["username"])
+    try:
+        user = get_object_or_404(models.UserAdmin,user_name = request.data["username"])
+    except Http404:
+        return Response({"error": "Invalid user"},status=status.HTTP_400_BAD_REQUEST)
 
     if not user.check_password(request.data["password"]):
         return Response({"error": "Invalid password"},status=status.HTTP_400_BAD_REQUEST)
