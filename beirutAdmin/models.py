@@ -103,6 +103,12 @@ class Locations(models.Model):
         return self.id
 
 
+class ReservationStatus(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=500)
+    description = models.CharField(max_length=500)
+
+
 class Reservations(models.Model):
     id = models.AutoField(primary_key=True)
     location = models.ForeignKey(Locations, on_delete=models.CASCADE)
@@ -203,3 +209,6 @@ class BeirutVideos(models.Model):
     description = models.CharField(max_length=500)
     video_url = models.FileField(max_length=500, upload_to='videos')
     status = models.BooleanField(default=False)
+
+
+

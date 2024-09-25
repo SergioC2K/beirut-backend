@@ -29,7 +29,7 @@ class MenuView(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = models.Menus.objects.all()
         category_id = self.request.query_params.get('category_id', None)
-        if id is not None:
+        if category_id is not None:
             queryset = queryset.filter(category_id=category_id)
         return queryset
 
