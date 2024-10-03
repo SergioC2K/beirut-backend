@@ -8,7 +8,7 @@ class CustomUserManager(BaseUserManager):
         if not email:
             raise ValueError('The email must be provided')
         if not password:
-            raise ValueError('The email must be provided')
+            raise ValueError('The password must be provided')
 
         user = self.model(
             email=self.normalize_email(email),
@@ -111,7 +111,6 @@ class ReservationStatus(models.Model):
 
 class Reservations(models.Model):
     id = models.AutoField(primary_key=True)
-    location = models.ForeignKey(Locations, on_delete=models.CASCADE)
     date = models.DateField(auto_now=False, auto_now_add=False)
     time = models.TimeField(auto_now=False, auto_now_add=False)
     email = models.EmailField(max_length=500)
@@ -119,7 +118,7 @@ class Reservations(models.Model):
     number_guests = models.IntegerField(default=0)
     phoneNumber = models.CharField(max_length=500)
     special_request = models.CharField(max_length=500, blank=True, null=True)
-    status = models.BooleanField(default=False)
+    status = models.ForeignKey(ReservationStatus, on_delete=models.CASCADE)
 
     def get_guests(self):
         return self.number_guests
@@ -127,17 +126,19 @@ class Reservations(models.Model):
     def get_name(self):
         return self.client_name
 
-    def get_location(self):
-        return self.location
-
     def get_email(self):
         return self.email
+
+    def reservation_finished(self):
+        return self.status
+
+    def is_confirmed(self):
+        available_reservations = Reservations.objects.filter(status=self.status)
 
 
 class SpecialEvents(models.Model):
     id = models.AutoField(primary_key=True)
     date = models.DateField(auto_now=False, auto_now_add=False)
-    event_location = models.ForeignKey(Locations, on_delete=models.CASCADE)
     event_name = models.CharField(max_length=500)
     event_description = models.CharField(max_length=500)
     additional_info = models.CharField(max_length=500, blank=True, null=True)
@@ -186,7 +187,7 @@ class Menus(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=500)
     description = models.CharField(max_length=500)
-    price = models.DecimalField(..., max_digits=5, decimal_places=2)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
     status = models.BooleanField(default=False)
     category = models.ForeignKey(Categories, on_delete=models.CASCADE)
 
@@ -209,6 +210,3 @@ class BeirutVideos(models.Model):
     description = models.CharField(max_length=500)
     video_url = models.FileField(max_length=500, upload_to='videos')
     status = models.BooleanField(default=False)
-
-
-

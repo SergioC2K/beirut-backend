@@ -42,6 +42,12 @@ class ReservationsSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class ReservationStatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.ReservationStatus
+        fields = '__all__'
+
+
 class GalleryVideoSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.BeirutVideos
